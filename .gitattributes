@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: GPL-2.0-Only
+
+# Force LF line endings for all text-based source and documentation files
+* text=auto eol=lf
+
+# Explicitly declare assembly and build files as text
+*.asm text eol=lf
+*.inc text eol=lf
+Makefile text eol=lf
+*.mk text eol=lf
+Kconfig text eol=lf
+Kbuild text eol=lf
+
+# Declare documentation files as text
+*.rst text eol=lf
+*.txt text eol=lf
+
+# Treat compiled binaries and disk images as immutable binary files
+*.bin binary
+*.elf binary
+*.exe binary
+*.img binary
+*.iso binary
+*.o binary
+*.obj binary

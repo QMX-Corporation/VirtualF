@@ -1,0 +1,13 @@
+Virtual-F v0.1-rc
+==================
+
+Virtual-F is a Emulator and Hypervisor writted in Assembly. No high-level languages or abstractions, is Assembly low-level.
+
+Server and Patches-Flow 
+------------------------
+I pretend:
+  * A Server,
+  * GitHub Mirror (https://github.com/QMX-Corporation/VirtualF),
+  * Patches-Flow (git format-patch, git send-email..)
+
+Thanks to contributte with project!

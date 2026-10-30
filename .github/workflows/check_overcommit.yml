@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: GPL-2.0-Only
+
+name: VirtualF Memory Overcommit Terror
+
+on:
+  workflow_dispatch:
+
+jobs:
+  overcommit-terror-audit:
+    name: Overcommit Stress Test (${{ matrix.processor }})
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        processor: [Threadripper, Core-i9, Core-i7, Core-i5, Core-i3]
+
+    steps:
+      # Step 1: Checkout the target repository source code
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # Step 2: Install core development tools, QEMU, and Valgrind
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            nasm \
+            qemu-system-x86 \
+            valgrind \
+            make \
+            mtools \
+            xorriso
+
+      # Step 3: Assemble all low-level assembly packages into the core binary
+      - name: Compile Assembly Modules
+        run: |
+          nasm -f bin SrcPkg/**/*.asm \
+                DebuggerPkg/**/*.asm \
+                DecodePkg/**/*.asm \
+                ArchPkg/**/*.asm \
+                SecurityPkg/**/*.asm \
+                CryptoPkg/**/*.asm \
+                DescryptoPkg/**/*.asm \
+                MdeModulePkg/**/*.asm \
+                ModulePkg/**/*.asm \
+                -o build/virtual-f.bin
+
+      # Step 4: Execute aggressive overcommit stress loops under QEMU emulation
+      - name: Execute Overcommit Terror Vectors
+        run: |
+          mkdir -p build/logs
+          for overcommit_test_id in $(seq 1 100); do
+            qemu-system-x86_64 -no-cpuid-checks -nographic -display none -smp 4 \
+              -kernel ./build/virtual-f.bin \
+              -D build/logs/overcommit_terror_${overcommit_test_id}.log || exit 1
+          done
+
+      # Step 5: Perform strict memory validation and leak detection post-terror
+      - name: Run Memory Checks with Valgrind
+        run: |
+          valgrind --leak-check=full --error-exitcode=1 ./build/virtual-f.bin

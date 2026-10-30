@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: GPL-2.0-Only 
+
+PROJECT DETERMINED (https://github.com/QMX-Corporation/VirtualF.git) : {
+     "Supreme Maintainer": "João Guilherme da Silva Freitas Lima",
+     "Supreme Maintainer Email": <joaoanandalima@gmail.com>,
+     "subsystem": [
+          "Core": "Subsystem/Core",
+          "Crypto": "Subsystem/Crypto",
+          "Debug": "Subsystem/Debug",
+          "Descrypto": "Subsystem/Descrypto",
+          "Interface": "Subsystem/Interface",
+          "Modules": "Subsystem/Modules",
+          "Security": "Subsystem/Security"
+     ],
+     "BDFL": [ 
+       "João Guilherme da Silva Freitas Lima",
+       "joaoanandalima@gmail.com"
+     ]
+}

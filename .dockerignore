@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: GPL-2.0-Only
+
+# Build outputs and compiled binaries
+build/
+*.bin
+*.elf
+*.exe
+*.img
+*.iso
+*.o
+*.obj
+
+# Logs and debugging output
+build/logs/
+*.log
+*.dump
+*.map
+valgrind-out.*
+
+# Version control and CI workflows metadata
+.git/
+.github/
+.devcontainer/
+
+# IDEs and Text Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temporary files and caches
+.cache/
+tmp/
+*.tmp

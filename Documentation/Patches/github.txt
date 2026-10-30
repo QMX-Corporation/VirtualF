@@ -1,0 +1,22 @@
+            FLOW     CONTRIBUTTE 
+    ================================
+
+1. Fork, Clone, See and Modify.
+
+  * Fork the repository (QMX-Corporation/VirtualF.git)
+  * git clone https://github.com/QMX-Corporation/VirtualF.git to clone 
+  * Entry in a File or create:
+  If you entry in a existant file; first, please see the code and after Modify.
+  * Modify the code.
+
+2. Open the Pull Request.
+
+   Run in Terminal: 
+      git add .
+      # Switch "..." to your message 
+      git commit -m "..."
+      # Push 
+      git push origin main 
+      # Entry in your Fork (Navigator, Sites) and 
+      # click in "Contributte" and, after, click in 
+      # "Open a Pull Request".

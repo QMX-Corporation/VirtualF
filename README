@@ -1,0 +1,33 @@
+Virtual-F
+=========
+
+Virtual-F is a Hypervisor and a Emulator writted in Assembly, no high-level languages, no abstractions. 
+
+Quick Start 
+------------
+Find your first start:
+  * LLM or AI Assistant: See Documentation/AI-LLM/coding-assistant.
+  * Maintainer and reviewing patches: See Documentation/Review/Reviewing.rst.
+  * See more of maintainers: See MAINTAINERS or Subsystem/.
+  * License: See LICENSE and SPDX-Identifier.
+  * Assembly Developer: See the code.
+  * Build: See .devcontainer/ or .github/workflows/.
+  * Editor Syntax: See .editorconfig.
+  * Git: See .gitattributes or .gitignore.
+  * Docker: See .devcontainer/ and .dockerignore.
+
+Objective 
+----------
+Virtual-F objectives:
+   * Superate QEMU.
+   * Domain all Archs (RISC-V, MIPS, ARM etc).
+
+License 
+-------- 
+Virtual-F is licensed under GPLv2. See LICENSE and SPDX-Identifier for more details.
+
+Support 
+-------- 
+For support, see:
+  * BDFL Email: <joaoanandalima@gmail.com>
+  * QMX Corporation (GitHub Discussions): https://github.com/QMX-Corporation.

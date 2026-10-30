@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: GPL-2.0-Only
+
+name: VirtualF Hardcore Tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hardcore-test-suite:
+    name: 50 Hardcore Tests (${{ matrix.processor }})
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        processor: [Threadripper, Core-i9, Core-i7, Core-i5, Core-i3]
+
+    steps:
+      # Step 1: Checkout the target repository source code
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # Step 2: Install core development tools, QEMU, and Valgrind
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            nasm \
+            qemu-system-x86 \
+            valgrind \
+            make \
+            mtools \
+            xorriso
+
+      # Step 3: Assemble all low-level assembly packages into the core binary
+      - name: Compile Assembly Modules
+        run: |
+          nasm -f bin SrcPkg/**/*.asm \
+                DebuggerPkg/**/*.asm \
+                DecodePkg/**/*.asm \
+                ArchPkg/**/*.asm \
+                SecurityPkg/**/*.asm \
+                CryptoPkg/**/*.asm \
+                DescryptoPkg/**/*.asm \
+                MdeModulePkg/**/*.asm \
+                ModulePkg/**/*.asm \
+                -o build/virtual-f.bin
+
+      # Step 4: Execute 100 rigorous low-level emulation and stress test iterations
+      - name: Execute 100 Hardcore Test Vectors
+        run: |
+          mkdir -p build/logs
+          for test_id in $(seq 1 100); do
+            qemu-system-x86_64 -no-cpuid-checks -nographic -display none -smp 4 \
+              -kernel ./build/virtual-f.bin \
+              -D build/logs/hardcore_test_${test_id}.log || exit 1
+          done
+
+      # Step 5: Perform strict post-test memory validation and leak detection
+      - name: Run Memory Checks with Valgrind
+        run: |
+          valgrind --leak-check=full --error-exitcode=1 ./build/virtual-f.bin

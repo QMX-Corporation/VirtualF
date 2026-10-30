@@ -1,0 +1,63 @@
+# SPDX-License-Identifier: GPL-2.0-Only
+
+name: VirtualF CI
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  build-and-emulate:
+    name: Build & Test (${{ matrix.processor }})
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        processor: [Threadripper, Core-i9, Core-i7, Core-i5, Core-i3]
+
+    steps:
+      # Step 1: Checkout the repository code from the target branch
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # Step 2: Install core development tools, QEMU, and Valgrind
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            nasm \
+            qemu-system-x86 \
+            valgrind \
+            make \
+            mtools \
+            xorriso
+
+      # Step 3: Assemble the pure Assembly source files using NASM
+      - name: Compile Assembly Binaries
+        run: |
+          nasm -f bin SrcPkg/**/*.asm \
+                DebuggerPkg/**/*.asm \
+                DecodePkg/**/*.asm \
+                ArchPkg/**/*.asm \
+                SecurityPkg/**/*.asm \
+                CryptoPkg/**/*.asm \
+                DescryptoPkg/**/*.asm \
+                MdeModulePkg/**/*.asm \
+                ModulePkg/**/*.asm \
+                -o build/virtual-f.bin
+
+      # Step 4: Perform memory analysis and leak detection using Valgrind
+      - name: Run Memory Checks with Valgrind
+        run: |
+          valgrind --leak-check=full --error-exitcode=1 ./build/virtual-f.bin
+
+      # Step 5: Test system emulation integrity under QEMU architecture
+      - name: Execute QEMU Emulation Verification
+        run: |
+          qemu-system-x86_64 -no-cpuid-checks -nographic -display none -smp 4

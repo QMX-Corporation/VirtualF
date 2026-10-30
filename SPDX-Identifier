@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: GPL-2.0-Only
+
+This project signing the SPDX Default.
+In files .asm:
+
+; SPDX-License-Identifier: GPL-2.0-Only 
+
+In others files, uses # 
+
+For more details, see:
+http://spdx.dev

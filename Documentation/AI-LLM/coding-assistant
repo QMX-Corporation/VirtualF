@@ -1,0 +1,17 @@
+Virtual-F v0.1-rc
+==================
+
+This file is for LLMs, AI-Powered or Humans helped per AI.
+
+1. Signature, License and LLM/AI Warning 
+
+   * Please, in all files:
+
+   // SPDX-License-Identifier: GPL-2.0-Only 
+   /* 
+      * A Description to File.
+      * 
+      * Engineer: LLM/AI Agent.
+      * 
+      * 
+    */
