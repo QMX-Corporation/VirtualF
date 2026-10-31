@@ -1,0 +1,27 @@
+# *
+# * SPDX-License-Identifier: GPL-2.0-only
+# *
+# * Engineer: João Guilherme da Silva Freitas Lima <joaoanandalima@gmail.com>
+# *
+# * Development in 0.1 Version: 2026-2032
+# * QMX Corporation, 2026
+# *
+
+mainmenu "Virtual-F Main Menu - Main Kconfig"
+
+config __MAIN_MENU
+     bool "Virtual-F"
+     default y
+     help 
+         The complect infraestructure of Virtual-F
+
+
+source "SrcPkg/Kconfig"
+source "SecurityPkg/Kconfig"
+source "ModulePkg/Kconfig"
+source "MdeModulesPkg/Kconfig"
+source "DescryptoPkg/Kconfig"
+source "DecodePkg/Kconfig"
+source "DebuggerPkg/Kconfig"
+source "CryptoPkg/Kconfig"
+source "ArchPkg/Kconfig"
